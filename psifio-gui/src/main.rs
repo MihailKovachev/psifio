@@ -1,3 +1,5 @@
+use psifio;
+
 fn main() {
-    println!("Hello, world!");
+    println!("{} from psifio-gui!", psifio::hello_test());
 }

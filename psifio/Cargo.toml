@@ -1,5 +1,12 @@
 [package]
 name = "psifio"
+authors = ["Mihail Kovachev"]
+description = "Rust library for blackjack simulations"
+repository = "https://github.com/MihailKovachev/psifio"
+homepage = "https://github.com/MihailKovachev/psifio/tree/main/psifio"
+keywords = ["blackjack", "simulation"]
+license-file = "LICENSE"
+readme = "README.md"
 version = "0.1.0"
 edition = "2021"
 

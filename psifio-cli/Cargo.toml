@@ -1,5 +1,12 @@
 [package]
 name = "psifio-cli"
+authors = ["Mihail Kovachev"]
+description = "Command-line tool for blackjack simulations"
+repository = "https://github.com/MihailKovachev/psifio"
+homepage = "https://github.com/MihailKovachev/psifio/tree/main/psifio-cli"
+keywords = ["blackjack", "simulation"]
+readme = "README.md"
+license-file = "LICENSE"
 version = "0.1.0"
 edition = "2021"
 

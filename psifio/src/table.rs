@@ -5,6 +5,7 @@ pub struct Table {
     betting_limits: BettingLimits,
     table_rules: TableRules,
     players: Vec<Player>
+
 }
 
 impl Table {
@@ -13,12 +14,24 @@ impl Table {
             betting_limits, table_rules, players
         }
     }
+
+    pub fn betting_limits(&self) -> BettingLimits {
+        self.betting_limits
+    }
+
+    pub fn table_rules(&self) -> &TableRules {
+        &self.table_rules
+    }
+
+    pub fn players(&self) -> &Vec<Player> {
+        &self.players
+    }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct BettingLimits {
-    min: f32,
-    max: f32
+    pub min: f32,
+    pub max: f32
 }
 
 impl BettingLimits {

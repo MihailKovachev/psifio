@@ -3,6 +3,12 @@ use derive_builder::Builder;
 #[derive(Debug, Clone, Builder)]
 pub struct TableRules {
 
+    /// How many decks does the table use.
+    number_of_decks: u8,
+
+    /// The percentage of cards dealt from the shoe before a shuffle.
+    deck_penetration: f32,
+
     /// The payout ratio of a player's blackjack.
     #[builder(default = "3.0 / 2.0 ")]
     blackjack_payout: f32,
@@ -47,6 +53,10 @@ pub struct TableRules {
 impl TableRules {
     pub fn builder() -> TableRulesBuilder {
         TableRulesBuilder::default()
+    }
+
+    pub fn number_of_decks(&self) -> u8 {
+        self.number_of_decks
     }
 }
 

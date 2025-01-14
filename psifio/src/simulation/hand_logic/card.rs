@@ -1,4 +1,6 @@
-#[derive(Debug, Copy, Clone)]
+use super::HandTotal;
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 #[repr(u8)]
 pub enum Card {
     Two = 2,

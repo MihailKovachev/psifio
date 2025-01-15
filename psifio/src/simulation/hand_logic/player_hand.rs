@@ -5,9 +5,9 @@ use super::{Card, Hand, HandAction, HandTotal, HandTotalable};
 #[derive(Debug)]
 pub struct PlayerHand {
     pub player: *mut SimulatedPlayer,
-    pub cards: Vec<Card>,
-    pub history: Vec<HandAction>,
-    pub bet: f32,
+    cards: Vec<Card>,
+    history: Vec<HandAction>,
+    bet: f32,
 }
 
 impl HandTotalable for PlayerHand {
@@ -31,6 +31,20 @@ impl Hand for PlayerHand {
 }
 
 impl PlayerHand {
+
+    pub fn new(player: *mut SimulatedPlayer, cards: Vec<Card>, bet: f32) -> Self {
+        Self {
+            player,
+            cards,
+            history: Vec::new(),
+            bet
+        }
+    }
+
+    pub fn stand(&mut self) {
+        self.history.push(HandAction::Stand);
+    }
+
     pub fn double_down(&mut self, card: Card) {
         debug_assert!(!self.was_doubled());
 
@@ -52,6 +66,14 @@ impl PlayerHand {
             history: vec![HandAction::Split],
             bet: self.bet,
         }
+    }
+
+    pub fn surrender(&mut self) {
+        self.history.push(HandAction::Surrender);
+    }
+
+    pub fn history(&self) -> &[HandAction] {
+        &self.history
     }
 
     pub fn was_split(&self) -> bool {

@@ -2,10 +2,13 @@ use super::{hand_total::HandTotalable, Card, HandTotal};
 
 pub trait Hand: HandTotalable {
     fn hit(&mut self, card: Card);
-    
-    fn is_blackjack(&self) -> bool;
-    
     fn cards(&self) -> &[Card];
+
+    fn is_blackjack(&self) -> bool {
+        let cards = self.cards();
+
+        cards.len() == 2 && cards.contains(&Card::Ace) && cards.contains(&Card::Ten)
+    }
 }
 
 impl HandTotalable for [Card] {

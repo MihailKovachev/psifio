@@ -1,4 +1,4 @@
-#[derive(Debug, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum HandAction {
     Hit,
     Stand,
@@ -7,7 +7,7 @@ pub enum HandAction {
     Surrender,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum InsuranceAction {
     Take,
     Refuse

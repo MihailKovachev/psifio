@@ -3,7 +3,7 @@ use super::{hand_total::HandTotalable, Card, Hand, HandTotal};
 #[derive(Debug)]
 pub struct DealerHand {
     /// The cards of the hand
-    cards: Vec<Card>
+    cards: Vec<Card>,
 }
 
 impl DealerHand {
@@ -12,10 +12,13 @@ impl DealerHand {
             cards: Vec::with_capacity(4),
         }
     }
+
+    pub fn with_initial_cards(cards: Vec<Card>) -> Self {
+        Self { cards }
+    }
 }
 
-impl Hand for DealerHand{
-
+impl Hand for DealerHand {
     fn hit(&mut self, card: Card) {
         self.cards.push(card);
     }
@@ -23,7 +26,7 @@ impl Hand for DealerHand{
     fn is_blackjack(&self) -> bool {
         self.cards.len() == 2 && self.cards.contains(&Card::Ace) && self.cards.contains(&Card::Ten)
     }
-    
+
     fn cards(&self) -> &[Card] {
         &self.cards
     }
@@ -31,30 +34,31 @@ impl Hand for DealerHand{
 
 impl HandTotalable for DealerHand {
     fn total(&self) -> HandTotal {
-        let mut total: u8 = 0;
-        let mut number_of_aces: u8 = 0;
+        self.cards.total()
+    }
+}
 
-        for card in &self.cards {
-            match card {
-                Card::Ace => {
-                    number_of_aces += 1;
-                }
-                _ => {
-                    total += u8::from(card.clone());
-                }
+#[cfg(test)]
+mod tests {
+    use crate::simulation::hand_logic::card::CARDS;
+
+    use super::*;
+
+    #[test]
+    fn is_blackjack() {
+        // Blackjacks
+        assert!(DealerHand::with_initial_cards(vec![Card::Ace, Card::Ten]).is_blackjack());
+        assert!(DealerHand::with_initial_cards(vec![Card::Ten, Card::Ace]).is_blackjack());
+
+        // No blackjacks
+        for first_card in &CARDS[0..9] {
+            for second_card in &CARDS[0..9] {
+                assert!(!DealerHand::with_initial_cards(vec![
+                    first_card.clone(),
+                    second_card.clone()
+                ])
+                .is_blackjack());
             }
         }
-
-        if number_of_aces > 0 {
-            if total + 11 > 21 {
-                total += number_of_aces * 1;
-                return HandTotal::new(total, false);
-            } else {
-                total += 11 + (number_of_aces - 1) * 1;
-                return HandTotal::new(total, true);
-            };
-        }
-
-        HandTotal::new(total, false)
     }
 }

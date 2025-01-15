@@ -12,31 +12,7 @@ pub struct PlayerHand {
 
 impl HandTotalable for PlayerHand {
     fn total(&self) -> HandTotal {
-        let mut total: u8 = 0;
-        let mut number_of_aces: u8 = 0;
-
-        for card in &self.cards {
-            match card {
-                Card::Ace => {
-                    number_of_aces += 1;
-                }
-                _ => {
-                    total += u8::from(card.clone());
-                }
-            }
-        }
-
-        if number_of_aces > 0 {
-            if total + 11 > 21 {
-                total += number_of_aces * 1;
-                return HandTotal::new(total, false);
-            } else {
-                total += 11 + (number_of_aces - 1) * 1;
-                return HandTotal::new(total, true);
-            };
-        }
-
-        HandTotal::new(total, false)
+        self.cards.total()
     }
 }
 
@@ -74,7 +50,7 @@ impl PlayerHand {
             player: self.player,
             cards: vec![card, cards[1]],
             history: vec![HandAction::Split],
-            bet: self.bet
+            bet: self.bet,
         }
     }
 
@@ -94,5 +70,47 @@ impl PlayerHand {
 
     pub fn cards(&self) -> &[Card] {
         &self.cards
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::ptr::null_mut;
+
+    use crate::simulation::hand_logic::card::CARDS;
+
+    use super::*;
+
+    #[test]
+    fn is_blackjack() {
+        // Blackjacks
+        assert!(PlayerHand {
+            player: null_mut(),
+            cards: vec![Card::Ace, Card::Ten],
+            history: Vec::new(),
+            bet: 10.0
+        }
+        .is_blackjack());
+
+        assert!(PlayerHand {
+            player: null_mut(),
+            cards: vec![Card::Ten, Card::Ace],
+            history: Vec::new(),
+            bet: 10.0
+        }
+        .is_blackjack());
+
+        // No blackjacks
+        for first_card in &CARDS[0..9] {
+            for second_card in &CARDS[0..9] {
+                assert!(!PlayerHand {
+                    player: null_mut(),
+                    cards: vec![first_card.clone(), second_card.clone()],
+                    history: Vec::new(),
+                    bet: 10.0
+                }
+                .is_blackjack());
+            }
+        }
     }
 }

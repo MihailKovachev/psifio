@@ -10,5 +10,5 @@ pub enum HandAction {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum InsuranceAction {
     Take,
-    Refuse
+    Refuse,
 }

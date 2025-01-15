@@ -45,50 +45,49 @@ impl HandTotalable for [Card] {
 mod tests {
     use crate::simulation::hand_logic::{Card, HandTotalable};
 
-
     #[test]
     fn hand_total() {
         let cards = [Card::Ace, Card::Ten];
         assert_eq!(cards.total().value(), 21);
         assert!(cards.total().is_soft());
 
-        let cards = [ Card::Ten, Card::Ace];
+        let cards = [Card::Ten, Card::Ace];
         assert_eq!(cards.total().value(), 21);
         assert!(cards.total().is_soft());
 
-        let cards = [ Card::Three, Card::Ace];
+        let cards = [Card::Three, Card::Ace];
         assert_eq!(cards.total().value(), 14);
         assert!(cards.total().is_soft());
 
-        let cards = [ Card::Three, Card::Two, Card::Ace];
+        let cards = [Card::Three, Card::Two, Card::Ace];
         assert_eq!(cards.total().value(), 16);
         assert!(cards.total().is_soft());
 
-        let cards = [ Card::Three, Card::Ace, Card::Two];
+        let cards = [Card::Three, Card::Ace, Card::Two];
         assert_eq!(cards.total().value(), 16);
         assert!(cards.total().is_soft());
 
-        let cards = [ Card::Ace, Card::Three, Card::Two];
+        let cards = [Card::Ace, Card::Three, Card::Two];
         assert_eq!(cards.total().value(), 16);
         assert!(cards.total().is_soft());
 
-        let cards = [ Card::Ace, Card::Ace];
+        let cards = [Card::Ace, Card::Ace];
         assert_eq!(cards.total().value(), 12);
         assert!(cards.total().is_soft());
 
-        let cards = [ Card::Ace, Card::Ace, Card::Ace];
+        let cards = [Card::Ace, Card::Ace, Card::Ace];
         assert_eq!(cards.total().value(), 13);
         assert!(cards.total().is_soft());
 
-        let cards = [ Card::Ace, Card::Nine, Card::Five];
+        let cards = [Card::Ace, Card::Nine, Card::Five];
         assert_eq!(cards.total().value(), 15);
         assert!(!cards.total().is_soft());
 
-        let cards = [ Card::Nine, Card::Ace, Card::Five];
+        let cards = [Card::Nine, Card::Ace, Card::Five];
         assert_eq!(cards.total().value(), 15);
         assert!(!cards.total().is_soft());
 
-        let cards = [ Card::Nine, Card::Five, Card::Ace];
+        let cards = [Card::Nine, Card::Five, Card::Ace];
         assert_eq!(cards.total().value(), 15);
         assert!(!cards.total().is_soft());
 

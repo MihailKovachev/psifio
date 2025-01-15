@@ -1,17 +1,14 @@
 #[derive(Debug, Clone, Copy)]
 pub struct HandTotal {
     value: u8,
-    is_soft: bool
+    is_soft: bool,
 }
 
 impl HandTotal {
     pub fn new(value: u8, is_soft: bool) -> Self {
-        Self {
-            value,
-            is_soft
-        }
+        Self { value, is_soft }
     }
-    
+
     pub fn value(&self) -> u8 {
         self.value
     }

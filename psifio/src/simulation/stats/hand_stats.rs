@@ -27,11 +27,11 @@ impl HandStats {
         Self { total, stats }
     }
 
-    pub fn get_stats_for_action(&self, action: &Option<HandAction>) -> &Stats {
-        self.stats.get(action).unwrap()
+    pub fn get_stats_for_action(&self, action: Option<HandAction>) -> &Stats {
+        self.stats.get(&action).unwrap()
     }
 
-    pub fn get_stats_for_action_mut(&mut self, action: &Option<HandAction>) -> &mut Stats {
-        self.stats.get_mut(action).unwrap()
+    pub fn get_stats_for_action_mut(&mut self, action: Option<HandAction>) -> &mut Stats {
+        self.stats.get_mut(&action).unwrap()
     }
 }

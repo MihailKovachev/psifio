@@ -13,7 +13,7 @@ pub struct SimulationStats {
 
     pub blackjack_stats: BlackjackStats,
 
-    hand_stats_table: HandStatsTable
+    pub hand_stats_table: HandStatsTable
 }
 
 impl SimulationStats {
@@ -28,16 +28,5 @@ impl SimulationStats {
             hand_stats_table: HandStatsTable::new()
             
         }
-    }
-
-    
-    /// Returns a reference to the hand statistics table.
-    pub fn get_hand_stats(&self) -> &HandStatsTable {
-        &self.hand_stats_table
-    }
-
-    /// Returns a mutable reference to the hand statistics table.
-    pub fn get_hand_stats_mut(&mut self) -> &mut HandStatsTable {
-        &mut self.hand_stats_table
     }
 }

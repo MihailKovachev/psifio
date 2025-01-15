@@ -14,10 +14,11 @@ impl Stats {
         wins.insert(WinReason::PlayerBlackjack, 0);
         wins.insert(WinReason::HigherTotal, 0);
 
-        let mut losses = HashMap::with_capacity(3);
+        let mut losses = HashMap::with_capacity(4);
         losses.insert(LossReason::DealerBlackjack, 0);
         losses.insert(LossReason::Busted, 0);
         losses.insert(LossReason::LowerTotal, 0);
+        losses.insert(LossReason::Surrendered, 0);
 
         let mut pushes = HashMap::with_capacity(2);
         pushes.insert(PushType::Blackjack, 0);
@@ -41,7 +42,10 @@ pub enum LossReason {
     Busted,
 
     /// Neither the player nor the dealer busted, but the dealer's hand had a higher total.
-    LowerTotal
+    LowerTotal,
+
+    /// The player surrendered
+    Surrendered
 }
 
 /// Represents the reason why the player's hand won.

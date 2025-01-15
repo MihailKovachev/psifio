@@ -6,10 +6,6 @@ pub trait Hand: HandTotalable {
     fn is_blackjack(&self) -> bool;
     
     fn cards(&self) -> &[Card];
-
-    fn is_busted(&self) -> bool {
-        self.total().value() > 21
-    }
 }
 
 impl HandTotalable for [Card] {

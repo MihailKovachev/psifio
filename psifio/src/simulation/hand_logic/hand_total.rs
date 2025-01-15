@@ -33,4 +33,7 @@ impl core::fmt::Display for HandTotal {
 
 pub trait HandTotalable {
     fn total(&self) -> HandTotal;
+    fn is_busted(&self) -> bool {
+        self.total().value() > 21
+    }
 }
